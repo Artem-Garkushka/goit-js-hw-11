@@ -1,38 +1,16 @@
-// render.js
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+export default createMurkup;
 
-const gallery = document.getElementById('gallery');
-const loader = document.createElement('div');
-loader.classList.add('loader');
-document.body.appendChild(loader);
+function createMurkup(arr) {
 
-export function displayImages(images) {
-  gallery.innerHTML = '';
-
-  const markup = images.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-    return `
-      <a href="${largeImageURL}" class="gallery-item">
-        <img src="${webformatURL}" alt="${tags}" />
-        <div class="info">
-          <p><b>Likes:</b> ${likes}</p>
-          <p><b>Views:</b> ${views}</p>
-          <p><b>Comments:</b> ${comments}</p>
-          <p><b>Downloads:</b> ${downloads}</p>
-        </div>
-      </a>
-    `;
-  }).join('');
-
-  gallery.insertAdjacentHTML('beforeend', markup);
-  const lightbox = new SimpleLightbox('.gallery a');
-  lightbox.refresh();
-}
-
-export function showLoader() {
-  loader.style.display = 'block';
-}
-
-export function hideLoader() {
-  loader.style.display = 'none';
-}
+    return arr.map(({webformatURL,largeImageURL,tags,likes,views,comments,downloads }) => `<li class="list-item" >
+  <a href="${largeImageURL}" alt="${tags}" title=""/>
+    <img src="${webformatURL}" alt="${tags}" class="img-item">
+  <div class="list-container">
+  <p class="item"><span class="item-text">Likes</span> <span>${likes}</span></p>
+  <p class="item"><span class="item-text">Wiews</span> <span>${views}</span></p>
+  <p class="item"><span class="item-text">Comments</span> <span>${comments}</span></p>
+  <p class="item"><span class="item-text">Downlods</span> <span>${downloads}</span></p>
+  </div></a>
+</li>`).join("")
+    
+} 
